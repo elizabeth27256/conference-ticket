@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Frontend Mentor | Conference ticket generator</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
   <div class="container">
     <h1>Your Journey to Coding Conf 2025 Starts Here!</h1>
     <p class="subtitle">Secure your spot at next year's biggest coding conference.</p>
 
     <form id="ticketForm">
-      
-      <label for="name">Upload-Avatar</label>
+      <label for="avatar">Upload Avatar</label>
       <div class="upload-box" id="uploadBox">
         <p>Drag and drop or click to upload</p>
         <input type="file" id="avatar" accept="image/png, image/jpeg" style="display: none;" />
@@ -28,7 +29,6 @@
       <label for="github">GitHub Username</label>
       <input type="text" id="github" placeholder="@yourusername" required />
 
-
       <button type="submit">Generate My Ticket</button>
     </form>
 
@@ -40,8 +40,17 @@
         <p id="ticketGitHub"></p>
       </div>
     </div>
+
+    <div id="confirmationMessage"
+      style="display:none; margin-top: 2rem; background-color: var(--neutral-700); padding: 1.5rem; border-radius: 16px; color: var(--neutral-0); max-width: 420px; box-shadow: 0 0 12px rgba(0,0,0,0.4);">
+      <p>Congrats, <span id="confirmName"></span>! Your ticket is ready.</p>
+      <p>We've emailed your ticket to <span id="confirmEmail"></span> and will send updates in the run up to the event.
+      </p>
+      <p><strong>Coding Conf</strong><br />Jan 31, 2025 / Austin, TX</p>
+    </div>
   </div>
 
   <script src="script.js"></script>
 </body>
+
 </html>

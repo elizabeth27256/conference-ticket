@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     reader.readAsDataURL(file);
   });
 
-  // Maneja como se guarada el formulario
+  // Maneja el envío del formulario luego de generar
   form.addEventListener('submit', (e) => {
     e.preventDefault();
 
@@ -48,18 +48,17 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    // Mostrar datos en el ticket que generamos
+    // Mostrar datos en el ticket generado
     ticketName.textContent = name;
     ticketEmail.textContent = email;
     ticketGitHub.textContent = github.startsWith('@') ? github : '@' + github;
 
-    // Mostrar imagen en el ticket
+    // Mostrar imagen en el ticket generado
     const reader = new FileReader();
     reader.onload = () => {
       ticketImage.src = reader.result;
-      ticket.style.display = 'flex'; //Esto va a mostrar el toicket"
+      ticket.style.display = 'flex'; // Muestra el ticket
     };
     reader.readAsDataURL(file);
   });
 });
-

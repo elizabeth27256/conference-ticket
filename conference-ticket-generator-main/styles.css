@@ -32,8 +32,16 @@ h1 {
   font-weight: 800;
   background: linear-gradient(to right, var(--orange-500), var(--neutral-0));
   -webkit-background-clip: text;
+  background-clip: text; /* add standard for compatibility */
   -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.subtitle {
   margin-bottom: 2rem;
+  text-align: center;
+  color: var(--neutral-300);
 }
 
 form {
@@ -46,6 +54,12 @@ form {
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
+}
+
+label {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--neutral-300);
 }
 
 input[type="text"],
@@ -81,8 +95,7 @@ input::placeholder {
   position: relative;
 }
 
-.upload-box:hover,
-.upload-box.dragover {
+.upload-box:hover {
   background-color: rgba(255, 255, 255, 0.07);
   border-color: var(--orange-700);
 }
@@ -108,48 +121,44 @@ button:hover {
   background-color: var(--orange-500);
 }
 
-#ticket {
-  margin: 2rem auto 0;
+.ticket-preview {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
   background-color: var(--neutral-700);
   padding: 1.5rem;
   border-radius: 16px;
-  text-align: center;
-  width: 320px;
+  width: 100%;
+  max-width: 420px;
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+  margin-top: 2rem;
 }
 
-#ticket img {
-  width: 100px;
-  height: 100px;
+.ticket-preview img {
+  width: 96px;
+  height: 96px;
   object-fit: cover;
   border-radius: 50%;
-  margin: 0 auto 1rem;
-  display: block;
+  flex-shrink: 0;
+  border: 2px solid var(--orange-500);
 }
 
 .ticket-info {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.3rem;
   color: var(--neutral-0);
+  font-size: 1rem;
 }
 
 .ticket-info p {
-  margin: 0.2rem 0;
-  font-size: 1rem;
-  font-weight: 500;
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.2;
   word-break: break-word;
 }
 
-#ticketName {
-  font-size: 1.25rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-}
-
-#ticketEmail,
-#ticketGitHub {
-  font-size: 0.9rem;
-  color: var(--neutral-300);
+#confirmationMessage p {
+  margin: 0.3rem 0;
 }
