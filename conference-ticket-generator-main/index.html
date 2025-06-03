@@ -6,6 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Frontend Mentor | Conference ticket generator</title>
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Oculta el ticket y mensaje al inicio */
+    #ticket,
+    #confirmationMessage {
+      display: none;
+    }
+  </style>
 </head>
 
 <body>
@@ -32,22 +39,25 @@
       <button type="submit">Generate My Ticket</button>
     </form>
 
-    <div id="ticket" class="ticket-preview" style="display: none;">
-      <img id="ticketImage" src="" alt="Avatar" />
-      <div class="ticket-info">
-        <p id="ticketName"></p>
-        <p id="ticketEmail"></p>
-        <p id="ticketGitHub"></p>
+    <div id="ticket" class="ticket">
+      <div class="ticket-header">
+        <img id="ticketImage" src="" alt="Avatar del usuario" />
+        <div class="ticket-details">
+          <h2 id="ticketName">Nombre Apellido</h2>
+          <p id="ticketEmail">correo@ejemplo.com</p>
+          <p id="ticketGitHub">@usuario</p>
+        </div>
+      </div>
+
+      <div class="ticket-footer">
+        <p><strong>Coding Conf</strong></p>
+        <p>31 de enero de 2025 • Austin, TX</p>
       </div>
     </div>
 
-    <div id="confirmationMessage"
-      style="display:none; margin-top: 2rem; background-color: var(--neutral-700); padding: 1.5rem; border-radius: 16px; color: var(--neutral-0); max-width: 420px; box-shadow: 0 0 12px rgba(0,0,0,0.4);">
+    <div id="confirmationMessage">
       <p>Congrats, <span id="confirmName"></span>! Your ticket is ready.</p>
-      <p>We've emailed your ticket to <span id="confirmEmail"></span> and will send updates in the run up to the event.
-      </p>
-      <p><strong>Coding Conf</strong><br />Jan 31, 2025 / Austin, TX</p>
-    </div>
+      <p>We've emailed your ticket to <span id="confirmEmail"></span> and will send updates in the run up to the event.</p>
   </div>
 
   <script src="script.js"></script>

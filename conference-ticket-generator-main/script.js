@@ -1,64 +1,111 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('ticketForm');
-  const uploadBox = document.getElementById('uploadBox');
-  const avatarInput = document.getElementById('avatar');
-  const ticket = document.getElementById('ticket');
-  const ticketImage = document.getElementById('ticketImage');
-  const ticketName = document.getElementById('ticketName');
-  const ticketEmail = document.getElementById('ticketEmail');
-  const ticketGitHub = document.getElementById('ticketGitHub');
+    // Elementos del DOM
+    const form = document.getElementById('ticketForm');
+    const uploadBox = document.getElementById('uploadBox');
+    const avatarInput = document.getElementById('avatar');
 
-  uploadBox.addEventListener('click', () => {
-    avatarInput.click();
-  });
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const githubInput = document.getElementById('github');
 
-  avatarInput.addEventListener('change', (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
+    const ticket = document.getElementById('ticket');
+    const ticketImage = document.getElementById('ticketImage');
+    const ticketName = document.getElementById('ticketName');
+    const ticketEmail = document.getElementById('ticketEmail');
+    const ticketGitHub = document.getElementById('ticketGitHub');
 
-    if (!file.type.startsWith('image/')) {
-      alert('Por favor selecciona una imagen válida.');
-      return;
-    }
+    const confirmationMessage = document.getElementById('confirmationMessage');
+    const confirmName = document.getElementById('confirmName');
+    const confirmEmail = document.getElementById('confirmEmail');
 
-    const reader = new FileReader();
-    reader.onload = () => {
-      uploadBox.style.backgroundImage = `url(${reader.result})`;
-      uploadBox.textContent = '';
-    };
-    reader.readAsDataURL(file);
-  });
+    // Ocultar ticket y mensaje de confirmación al cargar
+    ticket.style.display = 'none';
+    confirmationMessage.style.display = 'none';
 
-  // Maneja el envío del formulario luego de generar
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
+    // Activar input de archivo al hacer clic en el uploadBox
+    uploadBox.addEventListener('click', () => {
+        avatarInput.click();
+    });
 
-    const name = document.getElementById('name').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const github = document.getElementById('github').value.trim();
-    const file = avatarInput.files[0];
+    // Procesar imagen seleccionada
+    avatarInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (!file) {
+            uploadBox.style.backgroundImage = 'none';
+            uploadBox.innerHTML = '<span>Drag and drop or click to upload</span>';
+            return;
+        }
 
-    if (!name || !email || !github) {
-      alert('Por favor, completa todos los campos.');
-      return;
-    }
+        if (!file.type.startsWith('image/')) {
+            alert('Por favor selecciona una imagen válida (PNG, JPG o JPEG).');
+            e.target.value = '';
+            uploadBox.style.backgroundImage = 'none';
+            uploadBox.innerHTML = '<span>Drag and drop or click to upload</span>';
+            return;
+        }
 
-    if (!file) {
-      alert('Por favor, sube una imagen para tu avatar.');
-      return;
-    }
+        const reader = new FileReader();
+        reader.onload = () => {
+            uploadBox.style.backgroundImage = `url(${reader.result})`;
+            uploadBox.innerHTML = '';
+        };
+        reader.readAsDataURL(file);
+    });
 
-    // Mostrar datos en el ticket generado
-    ticketName.textContent = name;
-    ticketEmail.textContent = email;
-    ticketGitHub.textContent = github.startsWith('@') ? github : '@' + github;
+    uploadBox.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        uploadBox.classList.add('dragging');
+    });
 
-    // Mostrar imagen en el ticket generado
-    const reader = new FileReader();
-    reader.onload = () => {
-      ticketImage.src = reader.result;
-      ticket.style.display = 'flex'; // Muestra el ticket
-    };
-    reader.readAsDataURL(file);
-  });
+    uploadBox.addEventListener('dragleave', () => {
+        uploadBox.classList.remove('dragging');
+    });
+
+    uploadBox.addEventListener('drop', (e) => {
+        e.preventDefault();
+        uploadBox.classList.remove('dragging');
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+            avatarInput.files = files;
+            avatarInput.dispatchEvent(new Event('change'));
+        }
+    });
+
+    // Envío del formulario
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const name = nameInput.value.trim();
+        const email = emailInput.value.trim();
+        const github = githubInput.value.trim();
+        const file = avatarInput.files[0];
+
+        if (!name || !email || !github || !file) {
+            alert('Por favor, completa todos los campos y sube una imagen para tu avatar.');
+            return;
+        }
+
+        // Mostrar ticket con los datos
+        ticketName.textContent = name;
+        ticketEmail.textContent = email;
+        ticketGitHub.textContent = github.startsWith('@') ? github : '@' + github;
+
+        const readerTicket = new FileReader();
+        readerTicket.onload = () => {
+            ticketImage.src = readerTicket.result;
+            ticket.style.display = 'flex';
+        };
+        readerTicket.readAsDataURL(file);
+
+        // Mostrar mensaje de confirmación
+        confirmName.textContent = name;
+        confirmEmail.textContent = email;
+        confirmationMessage.style.display = 'flex';
+
+        // Ocultar el formulario
+        form.style.display = 'none';
+
+        // Scroll hacia arriba
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
 });
