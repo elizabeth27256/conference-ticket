@@ -1,4 +1,8 @@
 {
+  "homepage": "https://github.com/elizabeth27256/conference-ticket.git",
+  "scripts": {
+    "deploy":"gh-pages -d src"
+  },
   "devDependencies": {
     "gh-pages": "^6.3.0"
   }
