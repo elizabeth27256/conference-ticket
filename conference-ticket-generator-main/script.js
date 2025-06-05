@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Elementos del DOM
     const form = document.getElementById('ticketForm');
     const uploadBox = document.getElementById('uploadBox');
     const avatarInput = document.getElementById('avatar');
@@ -18,16 +17,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const confirmName = document.getElementById('confirmName');
     const confirmEmail = document.getElementById('confirmEmail');
 
-    // Ocultar ticket y mensaje de confirmación al cargar
+    const title = document.querySelector('h1');
+    const subtitle = document.querySelector('.subtitle');
+
     ticket.style.display = 'none';
     confirmationMessage.style.display = 'none';
 
-    // Activar input de archivo al hacer clic en el uploadBox
     uploadBox.addEventListener('click', () => {
         avatarInput.click();
     });
-
-    // Procesar imagen seleccionada
     avatarInput.addEventListener('change', (e) => {
         const file = e.target.files[0];
         if (!file) {
@@ -71,7 +69,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Envío del formulario
     form.addEventListener('submit', (e) => {
         e.preventDefault();
 
@@ -85,7 +82,9 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Mostrar ticket con los datos
+        title.style.display = 'none';
+        subtitle.style.display = 'none';
+
         ticketName.textContent = name;
         ticketEmail.textContent = email;
         ticketGitHub.textContent = github.startsWith('@') ? github : '@' + github;
@@ -97,15 +96,13 @@ document.addEventListener('DOMContentLoaded', () => {
         };
         readerTicket.readAsDataURL(file);
 
-        // Mostrar mensaje de confirmación
+
         confirmName.textContent = name;
         confirmEmail.textContent = email;
         confirmationMessage.style.display = 'flex';
 
-        // Ocultar el formulario
         form.style.display = 'none';
 
-        // Scroll hacia arriba
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 });
