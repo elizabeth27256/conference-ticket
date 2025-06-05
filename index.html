@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Frontend Mentor | Conference ticket generator</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="container">
+    <h1>Your Journey to Coding Conf 2025 Starts Here!</h1>
+    <p class="subtitle">Secure your spot at next year's biggest coding conference.</p>
+
+    <form id="ticketForm">
+      <label for="avatar">Upload Avatar</label>
+      <div class="upload-box" id="uploadBox">
+        <p>Drag and drop or click to upload</p>
+        <input type="file" id="avatar" accept="image/png, image/jpeg" style="display: none;" />
+      </div>
+
+      <label for="name">Full Name</label>
+      <input type="text" id="name" placeholder="Enter your full name" required />
+
+      <label for="email">Email Address</label>
+      <input type="email" id="email" placeholder="example@example.com" required />
+
+      <label for="github">GitHub Username</label>
+      <input type="text" id="github" placeholder="@yourusername" required />
+
+      <button type="submit">Generate My Ticket</button>
+    </form>
+
+    <div id="ticket" class="ticket">
+      <div class="ticket-header">
+        <img id="ticketImage" src="" alt="Avatar del usuario" />
+        <div class="ticket-details">
+          <h2 id="ticketName">Nombre Apellido</h2>
+          <p id="ticketEmail">correo@ejemplo.com</p>
+          <p id="ticketGitHub">@usuario</p>
+        </div>
+      </div>
+
+      <div class="ticket-footer">
+        <p><strong>Coding Conf</strong></p>
+        <p>31 de enero de 2025 • Austin, TX</p>
+      </div>
+    </div>
+
+    <div id="confirmationMessage">
+      <p>Congrats, <span id="confirmName"></span>! Your ticket is ready.</p>
+      <p>We've emailed your ticket to <span id="confirmEmail"></span> and will send updates in the run up to the event.
+      </p>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
